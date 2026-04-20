@@ -4,7 +4,9 @@ import com.jixiaoliu.service.ChatService;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.ChatClient.CallResponseSpec;
 import org.springframework.ai.chat.client.ChatClient.ChatClientRequestSpec;
+import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 
 /**
  * @ClassName ChatServiceImpl
@@ -35,5 +37,11 @@ public class ChatServiceImpl implements ChatService {
         ChatClientRequestSpec requestSpec = chatClient.prompt(msg);
         CallResponseSpec call = requestSpec.call();
         return call.content();
+    }
+
+    @Override
+    public Flux<String> chatFlux(String msg) {
+        // Flux<ChatResponse> response = chatClient.prompt(sysPrompt).stream().chatResponse();
+        return chatClient.prompt(sysPrompt).stream().content();
     }
 }

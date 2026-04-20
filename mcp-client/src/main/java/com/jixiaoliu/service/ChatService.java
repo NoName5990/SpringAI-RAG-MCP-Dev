@@ -1,5 +1,7 @@
 package com.jixiaoliu.service;
 
+import reactor.core.publisher.Flux;
+
 /**
  * @ClassName ChatService
  * @Author liujxiao
@@ -10,4 +12,6 @@ package com.jixiaoliu.service;
 public interface ChatService {
 
     public String chat(String msg);
+
+    public Flux<String> chatFlux(String msg);
 }
