@@ -23,11 +23,11 @@ public class LogAspect {
     private static final long ERROR_THRESHOLD = 6000;
 
     /**
+     * @param joinPoint
+     * @return java.lang.Object
      * @Description: 大模型调用AOP切面
      * @Date 2026/4/21 下午12:19
      * @Author liujxiao
-     * @param joinPoint
-     * @return java.lang.Object
      */
     @Around("execution(* com.jixiaoliu.service.impl..*.*(..))")
     public Object recordTimeLog(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -40,7 +40,9 @@ public class LogAspect {
             // 即使异常也能记录
             stopWatch.stop();
             long elapsedTime = stopWatch.getTotalTimeMillis();
-            String pointName = joinPoint.getTarget().getClass().getName() + "." + joinPoint.getSignature().getName();
+            String pointName =
+                joinPoint.getTarget().getClass().getName() + "." + joinPoint.getSignature()
+                    .getName();
             if (elapsedTime >= ERROR_THRESHOLD) {
                 log.error("{} 耗时 {} ms", pointName, elapsedTime);
             } else if (elapsedTime >= WARN_THRESHOLD) {

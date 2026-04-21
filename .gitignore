@@ -40,3 +40,4 @@ build/
 
 ### Application Configs ###
 **/application-dev.yml
+**/.env
