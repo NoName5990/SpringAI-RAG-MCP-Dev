@@ -24,12 +24,26 @@ public class ChatController {
     @Resource
     private ChatService chatService;
 
-
+    /**
+     * @Description: 简单对话
+     * @Date 2026/4/21 上午11:47
+     * @Author liujxiao
+     * @param msg
+     * @return java.lang.String
+     */
     @GetMapping("conver")
     public String chat(String msg) {
         return chatService.chat(msg);
     }
 
+    /**
+     * @Description: 流式输出
+     * @Date 2026/4/21 上午11:45
+     * @Author liujxiao
+     * @param msg
+     * @param response
+     * @return reactor.core.publisher.Flux<java.lang.String>
+     */
     @GetMapping("flux")
     public Flux<String> flux(String msg, HttpServletResponse response) {
         response.setCharacterEncoding("UTF-8");
