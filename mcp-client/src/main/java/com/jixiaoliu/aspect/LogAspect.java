@@ -1,5 +1,6 @@
 package com.jixiaoliu.aspect;
 
+import cn.hutool.core.date.StopWatch;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -30,13 +31,15 @@ public class LogAspect {
      */
     @Around("execution(* com.jixiaoliu.service.impl..*.*(..))")
     public Object recordTimeLog(ProceedingJoinPoint joinPoint) throws Throwable {
-        long startTime = System.currentTimeMillis();
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
         try {
             Object result = joinPoint.proceed();
             return result;
         } finally {
             // 即使异常也能记录
-            long elapsedTime = System.currentTimeMillis() - startTime;
+            stopWatch.stop();
+            long elapsedTime = stopWatch.getTotalTimeMillis();
             String pointName = joinPoint.getTarget().getClass().getName() + "." + joinPoint.getSignature().getName();
             if (elapsedTime >= ERROR_THRESHOLD) {
                 log.error("{} 耗时 {} ms", pointName, elapsedTime);
