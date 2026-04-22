@@ -32,10 +32,31 @@ public class SSEController {
         return SSEServer.connect(userId);
     }
 
+    /**
+     * @Description: SSE向用户发送消息
+     * @Date 2026/4/22 下午10:01
+     * @Author liujxiao
+     * @param userId
+     * @param message
+     * @return java.lang.Object
+     */
     @GetMapping( "sendMessage")
-    public Object connect(@RequestParam String userId, @RequestParam String message) {
+    public Object sendMessage(@RequestParam String userId, @RequestParam String message) {
         // e1iuia6e6
         SSEServer.sendMessage(userId, message, SSEMsgType.MESSAGE);
+        return "SUCCESS";
+    }
+
+    /**
+     * @Description: SSE群发消息
+     * @Date 2026/4/22 下午10:02
+     * @Author liujxiao
+     * @param message
+     * @return java.lang.Object
+     */
+    @GetMapping( "sendMessageAll")
+    public Object sendMessageAll(@RequestParam String message) {
+        SSEServer.sendMessageToAllUser(message);
         return "SUCCESS";
     }
 }

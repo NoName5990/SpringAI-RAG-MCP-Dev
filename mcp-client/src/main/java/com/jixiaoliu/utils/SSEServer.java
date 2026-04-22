@@ -123,6 +123,22 @@ public class SSEServer {
     }
 
     /**
+     * @Description: SSE群发消息
+     * @Date 2026/4/22 下午9:56
+     * @Author liujxiao
+     * @param message
+     * @return void
+     */
+    public static void sendMessageToAllUser(String message) {
+        if (CollectionUtils.isEmpty(sseClients)) {
+            return;
+        }
+        sseClients.forEach((userId, sseEmitter) -> {
+            sendSseEmitterMessage(sseEmitter, userId, message, SSEMsgType.MESSAGE);
+        });
+    }
+
+    /**
      * @param sseEmitter
      * @param userId
      * @param message
