@@ -1,6 +1,8 @@
 package com.jixiaoliu.service.impl;
 
+import cn.hutool.json.JSONUtil;
 import com.jixiaoliu.bean.ChatEntity;
+import com.jixiaoliu.bean.ChatResponseEntity;
 import com.jixiaoliu.enums.SSEMsgType;
 import com.jixiaoliu.service.ChatService;
 import com.jixiaoliu.utils.SSEServer;
@@ -50,15 +52,17 @@ public class ChatServiceImpl implements ChatService {
         String userPrompt = chatEntity.getMessage();
         String botMsgId = chatEntity.getBotMsgId();
         Flux<String> response = chatClient.prompt().user(userPrompt).stream().content();
-        response.toStream().forEach(resp-> {
-            SSEServer.sendMessage(userId, resp, SSEMsgType.ADD);
-            log.info("content: {}", resp);
-        });
-        /*List<String> list = response.toStream().map(resp -> {
+
+        List<String> list = response.toStream().map(resp -> {
             String content = resp.toString();
             SSEServer.sendMessage(userId, content, SSEMsgType.ADD);
             log.info("content: {}", content);
             return content;
-        }).toList();*/
+        }).toList();
+
+        String fullContent = list.stream().collect(Collectors.joining());
+        ChatResponseEntity chatResponseEntity = new ChatResponseEntity(fullContent, botMsgId);
+        SSEServer.sendMessage(userId, JSONUtil.toJsonStr(chatResponseEntity), SSEMsgType.FINISH);
+
     }
 }
