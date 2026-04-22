@@ -13,11 +13,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 public class Application {
+
+    // 硬编码即可
+    private static final String ENV_FILE = ".env.qwen";
+
     public static void main(String[] args) {
-        // 加载.env文件为map
-        Dotenv dotenv = Dotenv.configure().load();
-        // 将.env中的变量配置到环境变量中
+        // 加载.env文件中的变量到系统属性
+        Dotenv dotenv = Dotenv.configure().filename(ENV_FILE).load();
         dotenv.entries().forEach(entry -> System.setProperty(entry.getKey(), entry.getValue()));
+
         SpringApplication.run(Application.class, args);
     }
 }

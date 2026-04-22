@@ -10,4 +10,3 @@ spring:
       chat:
         options:
           model: ${OPEN_AI_MODEL}
-        completions-path: ${OPEN_AI_COMPLETIONS_PATH}

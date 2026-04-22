@@ -39,5 +39,6 @@ build/
 .DS_Store
 
 ### Application Configs ###
-**/application-dev.yml
+**/application-local.yml
 **/.env
+**/.env.*
