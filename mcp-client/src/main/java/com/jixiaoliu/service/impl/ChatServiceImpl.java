@@ -1,7 +1,14 @@
 package com.jixiaoliu.service.impl;
 
+import com.jixiaoliu.bean.ChatEntity;
+import com.jixiaoliu.enums.SSEMsgType;
 import com.jixiaoliu.service.ChatService;
+import com.jixiaoliu.utils.SSEServer;
+import java.util.List;
+import java.util.stream.Collectors;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
@@ -13,6 +20,7 @@ import reactor.core.publisher.Flux;
  * @date 2026/4/20 下午5:56
  */
 @Service
+@Slf4j
 public class ChatServiceImpl implements ChatService {
 
     private final ChatClient chatClient;
@@ -34,5 +42,23 @@ public class ChatServiceImpl implements ChatService {
     public Flux<String> chatFlux(String msg) {
         // Flux<ChatResponse> response = chatClient.prompt(sysPrompt).stream().chatResponse();
         return chatClient.prompt(msg).stream().content();
+    }
+
+    @Override
+    public void doChat(ChatEntity chatEntity) {
+        String userId = chatEntity.getCurrentUserName();
+        String userPrompt = chatEntity.getMessage();
+        String botMsgId = chatEntity.getBotMsgId();
+        Flux<String> response = chatClient.prompt().user(userPrompt).stream().content();
+        response.toStream().forEach(resp-> {
+            SSEServer.sendMessage(userId, resp, SSEMsgType.ADD);
+            log.info("content: {}", resp);
+        });
+        /*List<String> list = response.toStream().map(resp -> {
+            String content = resp.toString();
+            SSEServer.sendMessage(userId, content, SSEMsgType.ADD);
+            log.info("content: {}", content);
+            return content;
+        }).toList();*/
     }
 }

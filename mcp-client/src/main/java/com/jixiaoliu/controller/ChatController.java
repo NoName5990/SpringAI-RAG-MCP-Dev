@@ -1,12 +1,13 @@
 package com.jixiaoliu.controller;
 
+import com.jixiaoliu.bean.ChatEntity;
 import com.jixiaoliu.service.ChatService;
 import jakarta.annotation.Resource;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import reactor.core.publisher.Flux;
 
 /**
  * @ClassName ChatController
@@ -23,28 +24,15 @@ public class ChatController {
     private ChatService chatService;
 
     /**
-     * @Description: 简单对话
-     * @Date 2026/4/21 上午11:47
+     * @Description: 模型对话
+     * @Date 2026/4/22 下午10:48
      * @Author liujxiao
-     * @param msg
-     * @return java.lang.String
+     * @param chatEntity
+     * @return void
      */
-    @GetMapping("conver")
-    public String chat(String msg) {
-        return chatService.chat(msg);
+    @PostMapping("doChat")
+    public void doChat(@RequestBody ChatEntity chatEntity) {
+        chatService.doChat(chatEntity);
     }
 
-    /**
-     * @Description: 流式输出
-     * @Date 2026/4/21 上午11:45
-     * @Author liujxiao
-     * @param msg
-     * @param response
-     * @return reactor.core.publisher.Flux<java.lang.String>
-     */
-    @GetMapping("flux")
-    public Flux<String> flux(String msg, HttpServletResponse response) {
-        response.setCharacterEncoding("UTF-8");
-        return chatService.chatFlux(msg);
-    }
 }
