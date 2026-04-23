@@ -77,6 +77,27 @@
       <artifactId>spring-ai-starter-model-openai</artifactId>
     </dependency>
 
+<!--    向量库坐标-->
+    <dependency>
+      <groupId>org.springframework.ai</groupId>
+      <artifactId>spring-ai-advisors-vector-store</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.ai</groupId>
+      <artifactId>spring-ai-starter-vector-store-redis</artifactId>
+    </dependency>
+<!--    嵌入模型-->
+    <dependency>
+      <groupId>org.springframework.ai</groupId>
+      <artifactId>spring-ai-starter-model-transformers</artifactId>
+    </dependency>
+
+    <!--解析文档-->
+    <dependency>
+      <groupId>org.springframework.ai</groupId>
+      <artifactId>spring-ai-tika-document-reader</artifactId>
+    </dependency>
+
     <!-- 一个用于JVM的环境配置-->
     <dependency>
       <groupId>io.github.cdimascio</groupId>
