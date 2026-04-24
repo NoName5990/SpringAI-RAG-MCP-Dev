@@ -52,6 +52,13 @@ public class RagController {
         return CustomResult.ok(documentService.doSearch(question));
     }
 
+    /**
+     * @Description: rag查询
+     * @Date 2026/4/24 下午6:05
+     * @Author liujxiao
+     * @param chatEntity
+     * @return void
+     */
     @PostMapping("search")
     public void search(@RequestBody ChatEntity chatEntity) {
         chatService.doRagSearch(chatEntity);
