@@ -24,4 +24,13 @@ public interface ChatService {
      * @return void
      */
     void doChat(ChatEntity chatEntity);
+
+    /**
+     * @Description: rag查询
+     * @Date 2026/4/23 下午3:29
+     * @Author liujxiao
+     * @param chatEntity
+     * @return void
+     */
+    void doRagSearch(ChatEntity chatEntity);
 }
