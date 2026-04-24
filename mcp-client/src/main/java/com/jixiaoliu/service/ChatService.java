@@ -33,4 +33,13 @@ public interface ChatService {
      * @return void
      */
     void doRagSearch(ChatEntity chatEntity);
+
+    /**
+     * @Description: searxng联网查询
+     * @Date 2026/4/24 下午6:08
+     * @Author liujxiao
+     * @param chatEntity
+     * @return void
+     */
+    void doSearxngSearch(ChatEntity chatEntity);
 }

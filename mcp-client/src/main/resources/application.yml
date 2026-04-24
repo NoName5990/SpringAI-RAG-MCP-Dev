@@ -17,3 +17,9 @@ spring:
 logging:
   level:
     root: info
+
+# 网络搜索引擎
+websearch:
+  searxng:
+    url: http://localhost:6080/search
+    counts: 10
