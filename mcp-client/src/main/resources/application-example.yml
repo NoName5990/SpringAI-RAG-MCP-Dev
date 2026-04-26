@@ -3,6 +3,11 @@ server:
   port: 8080
 
 spring:
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 9379
+      password: 123456
   ai:
     openai:
       base-url: ${OPEN_AI_BASE_URL}
@@ -10,3 +15,23 @@ spring:
       chat:
         options:
           model: ${OPEN_AI_MODEL}
+    vectorstore:
+      redis:
+        initialize-schema: true         # 是否初始化所需的模式
+        index-name: ljx-vectorstore     # 用于存储向量的索引名称
+        prefix: 'embedding:'            # Redis 键的前缀
+    mcp:
+      client:
+        enabled: true
+        name: spring-ai-mcp-client-1.0.0
+        type: ASYNC
+        sse:
+          connections:
+            server1:
+              url: https://mcp.amap.com
+              sse-endpoint: /sse?key="高德地图的key"
+        stdio:
+          servers-configuration: classpath:mcp-server.json
+
+cors:
+  domain: http://127.0.0.1:5501/

@@ -14,10 +14,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.client.ChatClient.ChatClientRequestSpec;
-import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.document.Document;
+import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
@@ -38,11 +37,13 @@ public class ChatServiceImpl implements ChatService {
     @Resource
     private SearxngService searxngService;
 
-    private static final String SYS_PROMPT = "你是一个非常聪明的人工智能助手，可以帮我解决很多问题。你的名字叫'双双'。";
+    private static final String SYS_PROMPT =
+        "你是一个非常聪明的人工智能助手，可以帮我解决很多问题。你的名字叫'双双'。";
 
-    public ChatServiceImpl(ChatClient.Builder chatClientBuilder) {
+    public ChatServiceImpl(ChatClient.Builder chatClientBuilder, ToolCallbackProvider toolCallbackProvider) {
         this.chatClient = chatClientBuilder
-            .defaultSystem(SYS_PROMPT)
+            .defaultToolCallbacks(toolCallbackProvider)
+            // .defaultSystem(SYS_PROMPT)
             .build();
     }
 

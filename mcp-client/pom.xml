@@ -32,85 +32,100 @@
   </dependencyManagement>
 
   <dependencies>
+
+<!--SpringBoot相关-->
+    <!--SPRINGBOOT-TEST-->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
-
+    <!--SPRINGBOOT-WEB-->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
-
+    <!--SPRINGBOOT-AOP-->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-aop</artifactId>
     </dependency>
-
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <optional>true</optional>
-    </dependency>
-
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
-      <version>3.17.0</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.apache.groovy</groupId>
-      <artifactId>groovy-json</artifactId>
-      <version>4.0.27</version>
-    </dependency>
-
-    <dependency>
-      <groupId>cn.hutool</groupId>
-      <artifactId>hutool-all</artifactId>
-      <version>5.8.30</version>
-    </dependency>
-
+<!--    -->
+<!--SpringAI相关-->
+    <!--openai模型客户端-->
     <dependency>
       <groupId>org.springframework.ai</groupId>
       <artifactId>spring-ai-starter-model-openai</artifactId>
     </dependency>
-
-<!--    向量库坐标-->
+    <!--向量库坐标-->
     <dependency>
       <groupId>org.springframework.ai</groupId>
       <artifactId>spring-ai-advisors-vector-store</artifactId>
     </dependency>
+    <!--redis向量库-->
     <dependency>
       <groupId>org.springframework.ai</groupId>
       <artifactId>spring-ai-starter-vector-store-redis</artifactId>
     </dependency>
-<!--    嵌入模型-->
+    <!--集成mcp客户端-->
+    <dependency>
+      <groupId>org.springframework.ai</groupId>
+      <artifactId>spring-ai-starter-mcp-client</artifactId>
+    </dependency>
+    <!--SpringAI集成mcp-->
+    <dependency>
+      <groupId>org.springframework.ai</groupId>
+      <artifactId>spring-ai-mcp</artifactId>
+    </dependency>
+    <!--嵌入模型-->
     <dependency>
       <groupId>org.springframework.ai</groupId>
       <artifactId>spring-ai-starter-model-transformers</artifactId>
     </dependency>
-
     <!--解析文档-->
     <dependency>
       <groupId>org.springframework.ai</groupId>
       <artifactId>spring-ai-tika-document-reader</artifactId>
     </dependency>
-
-    <!-- 一个用于JVM的环境配置-->
+<!--    -->
+<!--其他-->
+    <!--lombok-->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <!--commons-->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.17.0</version>
+    </dependency>
+    <!--groovy-->
+    <dependency>
+      <groupId>org.apache.groovy</groupId>
+      <artifactId>groovy-json</artifactId>
+      <version>4.0.27</version>
+    </dependency>
+    <!--hutool工具包-->
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-all</artifactId>
+      <version>5.8.30</version>
+    </dependency>
+    <!--dot环境配置-->
     <dependency>
       <groupId>io.github.cdimascio</groupId>
       <artifactId>dotenv-java</artifactId>
       <version>3.2.0</version>
     </dependency>
-
     <!--okhttp-->
     <dependency>
       <groupId>com.squareup.okhttp3</groupId>
       <artifactId>okhttp</artifactId>
       <version>4.12.0</version>
     </dependency>
+<!--    -->
 
   </dependencies>
 
