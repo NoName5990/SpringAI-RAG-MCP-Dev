@@ -25,11 +25,16 @@ spring:
         enabled: true
         name: spring-ai-mcp-client-1.0.0
         type: ASYNC
+        streamable-http:
+          connections:
+            gdMap:
+              url: https://mcp.amap.com
+              sse-endpoint: /mcp?key='高德地图key'
         sse:
           connections:
-            server1:
-              url: https://mcp.amap.com
-              sse-endpoint: /sse?key="高德地图的key"
+            dateTool:
+              url: http://localhost:9090
+              sse-endpoint: /sse
         stdio:
           servers-configuration: classpath:mcp-server.json
 

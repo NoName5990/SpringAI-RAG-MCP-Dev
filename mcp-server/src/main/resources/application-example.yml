@@ -1,0 +1,13 @@
+# 端口号
+server:
+  port: 9090
+
+spring:
+  ai:
+    mcp:
+      server:
+        name: spring-ai-mcp-server-sse    # MCP服务器名称
+        version: 1.0.0                    # 服务器版本号
+        type: ASYNC                       #异步
+        sse-endpoint: /sse
+

@@ -1,0 +1,12 @@
+# 应用名
+spring:
+  application:
+    name: spring-ai-mcp-server
+  profiles:
+    active: local # 指定生效的环境配置
+
+
+# 日志级别
+logging:
+  level:
+    root: info

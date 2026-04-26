@@ -42,3 +42,6 @@ build/
 **/application-local.yml
 **/.env
 **/.env.*
+
+### 其他 ###
+课程文件/
