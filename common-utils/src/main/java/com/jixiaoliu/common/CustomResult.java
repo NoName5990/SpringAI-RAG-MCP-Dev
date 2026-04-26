@@ -1,4 +1,4 @@
-package com.jixiaoliu.utils;
+package com.jixiaoliu.common;
 
 /**
  * 

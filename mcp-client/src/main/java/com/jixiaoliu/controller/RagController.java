@@ -1,10 +1,9 @@
 package com.jixiaoliu.controller;
 
 import com.jixiaoliu.bean.ChatEntity;
+import com.jixiaoliu.common.CustomResult;
 import com.jixiaoliu.service.ChatService;
 import com.jixiaoliu.service.DocumentService;
-import com.jixiaoliu.utils.CustomResult;
-import com.jixiaoliu.utils.Resp;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.document.Document;
@@ -37,7 +36,7 @@ public class RagController {
      * @Date 2026/4/23 下午2:23
      * @Author liujxiao
      * @param file
-     * @return com.jixiaoliu.utils.CustomResult
+     * @return com.jixiaoliu.common.CustomResult
      */
     @PostMapping("uploadRagDoc")
     public CustomResult uploadRagDoc(@RequestParam("file") MultipartFile file) {
