@@ -27,6 +27,8 @@ public class EmailTool implements McpTool{
     private final JavaMailSender javaMailSender;
     private final MailProperties mailProperties;
 
+    private final static String MY_EMAIL_ADDRESS = "liujxiaom@163.com";
+
     public EmailTool(JavaMailSender javaMailSender, MailProperties mailProperties,
         JavaMailSenderImpl mailSender) {
         this.javaMailSender = javaMailSender;
@@ -51,5 +53,11 @@ public class EmailTool implements McpTool{
             log.error("邮件发送失败", e);
             throw new RuntimeException("邮件发送失败: " + e.getMessage(), e);
         }
+    }
+
+    @Tool(description = "查询我的邮箱")
+    public String queryEmail() {
+        log.info("========== 调用MCP工具：queryEmail() ==========");
+        return MY_EMAIL_ADDRESS;
     }
 }

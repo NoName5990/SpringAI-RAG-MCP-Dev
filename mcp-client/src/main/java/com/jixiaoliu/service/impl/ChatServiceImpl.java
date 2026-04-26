@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
+import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.tool.ToolCallbackProvider;
@@ -37,12 +39,16 @@ public class ChatServiceImpl implements ChatService {
     @Resource
     private SearxngService searxngService;
 
+    private ChatMemory chatMemory;
+
     private static final String SYS_PROMPT =
         "你是一个非常聪明的人工智能助手，可以帮我解决很多问题。你的名字叫'双双'。";
 
-    public ChatServiceImpl(ChatClient.Builder chatClientBuilder, ToolCallbackProvider toolCallbackProvider) {
+    public ChatServiceImpl(ChatClient.Builder chatClientBuilder, ToolCallbackProvider toolCallbackProvider, ChatMemory chatMemory) {
         this.chatClient = chatClientBuilder
             .defaultToolCallbacks(toolCallbackProvider)
+            .defaultAdvisors()
+            .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build())
             // .defaultSystem(SYS_PROMPT)
             .build();
     }
