@@ -63,6 +63,12 @@
       <artifactId>spring-boot-starter-mail</artifactId>
     </dependency>
 
+    <!--通用模块-->
+    <dependency>
+      <groupId>com.jixiaoliu</groupId>
+      <artifactId>common-utils</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
 
   </dependencies>
 

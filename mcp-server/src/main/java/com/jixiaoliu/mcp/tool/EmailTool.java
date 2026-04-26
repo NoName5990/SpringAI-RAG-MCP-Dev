@@ -1,6 +1,7 @@
 package com.jixiaoliu.mcp.tool;
 
 import com.jixiaoliu.bean.EmailRequest;
+import com.jixiaoliu.common.FormConvert;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.extern.slf4j.Slf4j;
@@ -43,7 +44,7 @@ public class EmailTool implements McpTool{
             mime.setFrom(mailProperties.getUsername());
             mime.setTo(emailRequest.getTo());
             mime.setSubject(emailRequest.getSubject());
-            mime.setText(emailRequest.getContent());
+            mime.setText(FormConvert.convertToHtml(emailRequest.getContent()),true);
             javaMailSender.send(mimeMessage);
             return "邮件发送成功";
         } catch (MessagingException e) {
