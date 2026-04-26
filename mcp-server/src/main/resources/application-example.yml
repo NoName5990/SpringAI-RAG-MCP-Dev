@@ -10,4 +10,6 @@ spring:
         version: 1.0.0                    # 服务器版本号
         type: ASYNC                       #异步
         sse-endpoint: /sse
-
+  mail:
+    username: xxx@163.com
+    password: 授权码

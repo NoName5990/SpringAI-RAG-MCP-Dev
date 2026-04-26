@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Slf4j
-public class DateTool {
+public class DateTool implements McpTool {
 
 
     /**

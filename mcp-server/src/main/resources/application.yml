@@ -4,6 +4,19 @@ spring:
     name: spring-ai-mcp-server
   profiles:
     active: local # 指定生效的环境配置
+  mail:
+    host: smtp.163.com               # 邮箱host
+    port: 465                      # 邮箱固定端口
+    protocol: smtp                  # 邮箱协议
+    default-encoding: UTF-8         # 默认编码
+    properties:
+      mail:
+        smtp:
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+          ssl:
+            enable: true
 
 
 # 日志级别

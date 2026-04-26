@@ -1,6 +1,7 @@
 package com.jixiaoliu.configuration;
 
-import com.jixiaoliu.mcp.tool.DateTool;
+import com.jixiaoliu.mcp.tool.McpTool;
+import java.util.List;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.ai.tool.method.MethodToolCallbackProvider;
 import org.springframework.context.annotation.Bean;
@@ -17,9 +18,9 @@ import org.springframework.context.annotation.Configuration;
 public class ToolConfig {
 
     @Bean
-    public ToolCallbackProvider toolCallbackProvider(DateTool dateTool) {
+    public ToolCallbackProvider toolCallbackProvider(List<McpTool> mcpTools) {
         return MethodToolCallbackProvider.builder()
-            .toolObjects(dateTool)
+            .toolObjects(mcpTools.toArray())
             .build();
     }
 }
