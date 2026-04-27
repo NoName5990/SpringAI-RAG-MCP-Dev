@@ -30,4 +30,7 @@ public class EmailRequest {
 
     @ToolParam(description = "收件人")
     private String to;
+
+    @ToolParam(description = "邮件内容是否为html还是markdown格式。如果是Markdown格式，则为1；如果是html格式，则为2.")
+    private Integer contentType;
 }

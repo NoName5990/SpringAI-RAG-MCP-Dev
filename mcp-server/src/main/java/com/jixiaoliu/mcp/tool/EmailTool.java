@@ -46,7 +46,14 @@ public class EmailTool implements McpTool{
             mime.setFrom(mailProperties.getUsername());
             mime.setTo(emailRequest.getTo());
             mime.setSubject(emailRequest.getSubject());
-            mime.setText(FormConvert.convertToHtml(emailRequest.getContent()),true);
+            if (emailRequest.getContentType() == 1) {
+                mime.setText(FormConvert.convertToHtml(emailRequest.getContent()),true);
+            } else if (emailRequest.getContentType() == 2) {
+                mime.setText(emailRequest.getContent(),true);
+            } else {
+                mime.setText(emailRequest.getContent());
+            }
+
             javaMailSender.send(mimeMessage);
             return "邮件发送成功";
         } catch (MessagingException e) {
