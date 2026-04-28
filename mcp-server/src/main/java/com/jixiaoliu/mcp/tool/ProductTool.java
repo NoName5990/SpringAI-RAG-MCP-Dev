@@ -2,6 +2,7 @@ package com.jixiaoliu.mcp.tool;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.jixiaoliu.bean.CreateProductRequest;
+import com.jixiaoliu.bean.ModifyProductRequest;
 import com.jixiaoliu.bean.QueryProductRequest;
 import com.jixiaoliu.enums.ListSortEnum;
 import com.jixiaoliu.enums.PriceCompareEnum;
@@ -9,8 +10,8 @@ import com.jixiaoliu.mapper.ProductMapper;
 import com.jixiaoliu.pojo.Product;
 import jakarta.annotation.Resource;
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -40,6 +41,7 @@ public class ProductTool implements McpTool{
      * @param createProductRequest
      * @return java.lang.String
      */
+    @Transactional
     @Tool(description = "创建/新增商品信息记录")
     public String createNewProduct(@ToolParam(description = "商品信息") CreateProductRequest createProductRequest) {
 
@@ -68,7 +70,6 @@ public class ProductTool implements McpTool{
      * @param productId
      * @return java.lang.String
      */
-    @Transactional
     @Tool(description = "删除商品信息")
     public String deleteProduct(@ToolParam(description = "商品编号") String productId) {
 
@@ -170,16 +171,47 @@ public class ProductTool implements McpTool{
         queryWrapper = priceWrapper(queryWrapper, priceCompareEnum, price);
 
 
-        if (sortEnum != null && sortEnum.type.equals(ListSortEnum.ASC.type)) {
+        if (sortEnum != null && Objects.equals(sortEnum.type, ListSortEnum.ASC.type)) {
             queryWrapper.orderByAsc("price");
         }
-        if (sortEnum != null && sortEnum.type.equals(ListSortEnum.DESC.type)) {
+        if (sortEnum != null && Objects.equals(sortEnum.type, ListSortEnum.DESC.type)) {
             queryWrapper.orderByDesc("price");
         }
 
         List<Product> productList = productMapper.selectList(queryWrapper);
 
         return productList;
+    }
+
+    /**
+     * @Description: 根据商品的ID/编号修改商品信息
+     * @Date 2026/4/28 上午9:14
+     * @Author liujxiao
+     * @param modifyProductRequest
+     * @return java.lang.String
+     */
+    @Tool(description = "根据商品的ID/编号修改商品信息")
+    @Transactional
+    public String modifyProduct(ModifyProductRequest modifyProductRequest) {
+
+        log.info("========== 调用MCP工具：modifyProduct() ==========");
+        log.info(String.format("| 参数 modifyProductRequest 为： %s", modifyProductRequest.toString()));
+        log.info("========== End ==========");
+
+        Product product = new Product();
+        BeanUtils.copyProperties(modifyProductRequest, product);
+
+        product.setUpdateTime(LocalDateTime.now());
+
+        QueryWrapper<Product> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("product_id", modifyProductRequest.getProductId());
+
+        int update = productMapper.update(product, queryWrapper);
+        if (update <= 0) {
+            return "商品信息更新失败，或商品可能不存在";
+        }
+
+        return "商品信息更新成功";
     }
 
     /**
