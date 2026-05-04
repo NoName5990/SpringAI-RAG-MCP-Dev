@@ -40,14 +40,18 @@ build/
 
 ### Application Configs ###
 **/application-local.yml
+**/application-prod.yml
+**/application-docker.yml
 **/.env
 **/.env.*
+!**/.env.example
 
 ### claude ###
 .claude/
+CLAUDE.md
 
 ### 其他 ###
-课程文件/
+files/
 
 ### 本地生成 ###
 *.html

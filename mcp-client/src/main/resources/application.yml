@@ -10,7 +10,7 @@ spring:
   application:
     name: spring-ai-mcp-client
   profiles:
-    active: local # 指定生效的环境配置
+    active: docker # 指定生效的环境配置
 
 
 # 日志级别
@@ -18,8 +18,3 @@ logging:
   level:
     root: info
 
-# 网络搜索引擎
-websearch:
-  searxng:
-    url: http://localhost:6080/search
-    counts: 10

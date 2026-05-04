@@ -7,7 +7,7 @@ spring:
     redis:
       host: 127.0.0.1
       port: 9379
-      password: 123456
+      password: '你的密码'
   ai:
     openai:
       base-url: ${OPEN_AI_BASE_URL}

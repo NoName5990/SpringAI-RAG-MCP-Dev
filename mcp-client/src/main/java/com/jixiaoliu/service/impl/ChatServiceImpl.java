@@ -44,10 +44,11 @@ public class ChatServiceImpl implements ChatService {
     private static final String SYS_PROMPT =
         "你是一个非常聪明的人工智能助手，可以帮我解决很多问题。你的名字叫'双双'。";
 
-    public ChatServiceImpl(ChatClient.Builder chatClientBuilder, ToolCallbackProvider toolCallbackProvider, ChatMemory chatMemory) {
+    public ChatServiceImpl(ChatClient.Builder chatClientBuilder,
+                            ToolCallbackProvider toolCallbackProvider,
+                            ChatMemory chatMemory) {
         this.chatClient = chatClientBuilder
             .defaultToolCallbacks(toolCallbackProvider)
-            .defaultAdvisors()
             .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build())
             // .defaultSystem(SYS_PROMPT)
             .build();
